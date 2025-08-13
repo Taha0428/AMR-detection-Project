@@ -1,0 +1,41 @@
+#SET WORKING DIRECTORY
+setwd('C:\\Users\\Abdullah\\Documents\\Heatmap')
+
+# Install data visualization package
+install.packages("gplots")
+install.packages("ggplot2")
+library(gplots)
+
+# Replace "module 5 excel.csv" with the path to your data file
+data <- read.csv("module 5 excel.csv", header = TRUE, row.names = 1)
+
+# Transpose the data
+data <- t(data)
+
+#Define custom color palette
+my_palette <- colorRampPalette(c("black", "green", "red"))(256)
+
+#Open a new graphics device
+png("module 5 excel.png", width = 7000, height = 4000) #change file format as needed (e.g., pdf, jpeg)
+
+# create heatmap
+heatmap.2(data,
+          scale="none",
+          Rowv=FALSE,
+          colv=FALSE,
+          dendrogram="none",
+          col=my_palette,
+          trace="none",
+          margins=c(40,130),    #Adjust margins
+          cexRow=5,             #size of row labels
+          cexCol=5,             #size of column labels
+          key=TRUE,
+          keysize=0.5,
+          key.title=NULL,
+          key.xlab=NULL,
+          key.ylab=NULL,
+          density.info="none",
+          cex.axis=0.7,
+          las=2)
+#close the graphics device
+dev.off()
